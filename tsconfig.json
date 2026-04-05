@@ -1,12 +1,10 @@
 {
 	"compilerOptions": {
 		"target": "ESNext",
-		"module": "NodeNext",
-		"moduleResolution": "node",
+		"module": "ESNext",
+		"moduleResolution": "bundler",
 		"esModuleInterop": true,
 		"outDir": "./build",
-		// "declaration": true,
-		// code quality options
 		"allowJs": false,
 		"allowSyntheticDefaultImports": true,
 		"allowUnreachableCode": false,
@@ -19,16 +17,9 @@
 		"noUncheckedIndexedAccess": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
-		"removeComments": true,
 		"resolveJsonModule": true,
-		"skipLibCheck": true, // skip type checking of all .d.ts files
-		// "sourceMap": false, // enable debugger
+		"skipLibCheck": true,
 		"strict": true
 	},
-	"include": [
-		"src/"
-	],
-	"ts-node": {
-		"esm": true
-	}
+	"include": ["src/", "tests/"]
 }

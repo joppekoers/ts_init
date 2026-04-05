@@ -1,10 +1,10 @@
 **/.DS_Store*
 **/node_modules
-**/README.md
-**/.dockerignore
 **/README.*
-
-/build
 /.git
+/build
 /Dockerfile*
 /docker-compose*.y*ml
+/.github
+/.vscode
+/tests

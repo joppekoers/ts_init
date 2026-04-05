@@ -1,5 +1,1 @@
-const a = {
-	name: 'a',
-}
-
-console.log('Hello World', a)
+console.log('Hello World')

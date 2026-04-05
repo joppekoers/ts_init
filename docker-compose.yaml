@@ -1,5 +1,3 @@
-version: '3.7'
-
 services:
   ts_init:
     container_name: ts_init

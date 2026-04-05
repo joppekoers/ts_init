@@ -1,28 +1,25 @@
-# ============== DEPS ===============
-FROM node:18-alpine as dependencies
+
+FROM oven/bun:1 AS base
 WORKDIR /app
 
-# ========== BUILDER MAIN ===========
-FROM dependencies as builder-main
+FROM base AS install
+COPY package.json bun.lock ./
+RUN bun install --frozen-lockfile --production
+
+FROM base AS check
+COPY package.json bun.lock ./
+RUN bun install --frozen-lockfile
+COPY . .
+RUN bun run lint:check
+RUN bun run typecheck
+RUN bun test
+
+FROM base AS release
 WORKDIR /app
 
-COPY package.json package-lock.json ./
-RUN npm ci
-COPY . ./
-RUN npm run lint:check
-# RUN npm run test # TODO: enable
+COPY --from=install /app/node_modules ./node_modules
+COPY src/ ./src/
+COPY package.json ./
 
-ENV NODE_ENV=production
-RUN npm run build
-RUN npm prune --production
-
-# =============== MAIN ===============
-FROM gcr.io/distroless/nodejs:18 as main
-ENV NODE_ENV=production
-WORKDIR /app
-
-COPY --from=builder-main /app/package.json ./
-COPY --from=builder-main /app/node_modules ./node_modules
-COPY --from=builder-main /app/build ./build
-
-CMD [ "build/app.js" ]
+USER bun
+ENTRYPOINT ["bun", "run", "src/app.ts"]

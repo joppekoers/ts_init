@@ -1,28 +1,44 @@
 # TS init
-A template repository for TypeScript projects\
-Because the whole JS build system is quite confusing
+
+A template repository for TypeScript projects using Bun.
 
 Svelte version: https://github.com/SirMorfield/svelte_init
 
-# Usage
+## Prerequisites
+
+- [Bun](https://bun.sh/) (v1.2+)
+
+## Usage
+
+```sh
+bun install
+bun run dev       # watch mode
+bun run start     # run directly
+bun test          # run tests
+bun run typecheck # type check without emitting
+bun run lint:check
+bun run format:check
+```
+
+### VS Code
+
 - Install the `dbaeumer.vscode-eslint` extension
-- Make sure you disable the `esbenp.prettier-vscode` extension if you have it installed
+- Install the `oven.bun-vscode` extension for debugging
 
-# Features
-- eslint
-- eslint caching
-- prettier (as subset of eslint so you can use eslint --fix and not have to also run prettier)
-- Lining check in github pipeline
-- pre-commit hook for linting
-- containerized by docker
-- Pushes image to container registry on merge to master
-- Watchtower to automatically pull latest image from container registry
-- ES module
+## Features
 
-# TODO
-- Use multi stage build to reduce image size
-- Caching in docker (compose)
-- Run pipeline locally
-- Improve the containerize.yaml to also support tags
-- Add playwright/jest testing
-- Run test suite in pipeline
+- Bun runtime (no Node.js required)
+- TypeScript with strict mode
+- ESLint v9 flat config
+- Prettier (standalone, not coupled to ESLint)
+- Bun test runner
+- Lint + format + typecheck in CI pipeline
+- Pre-commit hook for linting, formatting, and type checking
+- Containerized with Docker (multi-stage Bun image)
+- Pushes image to container registry on merge to main
+- Watchtower for automatic container updates
+
+## TODO
+
+- Caching in Docker (compose)
+- Improve containerize.yaml to also support tags

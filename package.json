@@ -2,25 +2,23 @@
 	"name": "ts_init",
 	"version": "",
 	"description": "",
-	"main": "build/app.js",
 	"scripts": {
-		"dev": "ts-node-dev --quiet --clear --rs --respawn src/app.ts",
+		"dev": "bun run --watch src/app.ts",
+		"start": "bun run src/app.ts",
 		"build": "tsc",
-		"start": "node build/app.js",
-		"lint:check": "DEBUG=eslint:cli-engine eslint --cache --cache-location node_modules/.eslintcache .",
-		"lint:fix": "DEBUG=eslint:cli-engine eslint --cache --cache-location node_modules/.eslintcache --fix ."
+		"typecheck": "tsc --noEmit",
+		"lint:check": "eslint --cache --cache-location node_modules/.eslintcache . && prettier --check .",
+		"lint:fix": "eslint --cache --cache-location node_modules/.eslintcache --fix . && prettier --write .",
+		"test": "bun test"
 	},
 	"dependencies": {},
 	"devDependencies": {
-		"@types/node": "^18.0.1",
-		"@typescript-eslint/eslint-plugin": "^5.59.7",
-		"@typescript-eslint/parser": "^5.59.7",
-		"eslint": "^8.41.0",
-		"eslint-config-prettier": "^8.8.0",
-		"eslint-plugin-prettier": "^4.2.1",
-		"typescript": "^5.0.4"
-	},
-	"engines": {
-		"node": ">=18.0.0"
+		"@eslint/js": "^9.0.0",
+		"@types/bun": "latest",
+		"eslint": "^9.0.0",
+		"eslint-config-prettier": "^10.0.0",
+		"prettier": "^3.0.0",
+		"typescript": "^5.7.0",
+		"typescript-eslint": "^8.0.0"
 	}
 }
